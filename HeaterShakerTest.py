@@ -64,8 +64,19 @@ if __name__ == '__main__':
             print("\tCurrent Temperature ({0}C): {1}".format(u"\u00b0", bs3000T.getTempActual()))
             print(f"\t{60-(i+1)*10} seconds left")
             print("\tTemp State (string): {0}\n".format(bs3000T.getTempStateAsString()))
-        print("Changing temperature to 25 " + u"\u00b0" + "C\n")
-        bs3000T.changeTemp(temp=25)
+        print("Changing temperature to 28 " + u"\u00b0" + "C\n")
+        bs3000T.changeTemp(temp=28)
 
     # ELM Control Tests
-    # User Defined Program Tests
+    run_test = True if input("\n\aWould you like to run ELM control tests [y/n]?\n") == 'y' else False
+    if run_test:
+        print(f"Current ELM State (int): {bs3000T.getElmState()}")
+        print(f"Current ELM State (string): {bs3000T.getElmStateAsString()}\n")
+        print("Setting ELM to it's Locked State:")
+        bs3000T.setElmLockPos()
+        print(f"Current ELM State (int): {bs3000T.getElmState()}")
+        print(f"Current ELM State (string): {bs3000T.getElmStateAsString()}\n")
+        print("Setting ELM to it's Unlocked State:")
+        bs3000T.setElmUnlockPos()
+        print(f"Current ELM State (int): {bs3000T.getElmState()}")
+        print(f"Current ELM State (string): {bs3000T.getElmStateAsString()}\n")

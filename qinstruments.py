@@ -380,3 +380,61 @@ class BioShake3000T():
     # --------------------------------------------------------------------------------
     # ELM Control Commands
     # --------------------------------------------------------------------------------
+
+    def setElmLockPos(self, warn=True):
+        '''
+        Closes the Edge Locking Mechanism (ELM).
+            The runtime is less than 3000 msec
+            The microplate is concentrically centered, aligned and locked
+            This position is a current-free static state
+        '''
+        if warn:
+            print("Warning (BioShake3000T.setElmLockPos): this takes about 3 seconds...")
+        self._write_command_and_wait(b'selp', timeout=3)
+
+    def setElmUnlockPos(self, warn=True):
+        '''
+        Opens the Edge Locking Mechanism (ELM).
+            The runtime is less than 3000 msec
+            The microplate is not locked
+            This position is a current-free static state
+        '''
+        if warn:
+            print("Warning (BioShake3000T.setElmLockPos): this takes about 3 seconds...")
+        self._write_command_and_wait(b'seup', timeout=3)
+
+    def getElmState(self):
+        '''
+        Returns the state of the ELM.
+            value   0   ELM nor in lock or unlock position
+            value   1   ELM in lock position - Microplate is locked
+            value   3   ELM in unlock position - Microplate is unlocked
+            value   9   Error - detecting ELM state
+        '''
+        values = {
+            0: "ELM nor in lock or unlock position",
+            1: "ELM in lock position - Microplate is locked",
+            3: "ELM in unlock position - Microplate is unlocked",
+            9: "Error - detecting ELM state",
+            }
+
+        elmstate_bstring = self._write_command_and_wait(b'ges')
+        elmstate_string = elmstate_bstring.decode('utf-8')
+        return int(elmstate_string)
+
+    def getElmStateAsString(self):
+        '''
+        Returns the state of the ELM.
+            value   ELMLocked   Microplate is locked
+            value   ELMUnlocked Microplate is unlocked
+            value   ELMError    Error 
+        '''
+        values = {
+            'ELMLocked': "Microplate is locked",
+            'ELMUnlocked': "Microplate is unlocked",
+            'ELMError': 'Error',
+            }
+
+        elmstate_bstring = self._write_command_and_wait(b'gesas')
+        elmstate_string = elmstate_bstring.decode('utf-8')
+        return elmstate_string
