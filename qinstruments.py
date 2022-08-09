@@ -1,6 +1,3 @@
-from http.client import responses
-from socket import timeout
-from urllib import response
 import serial
 import time
 import sys
