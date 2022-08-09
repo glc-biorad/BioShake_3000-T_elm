@@ -42,4 +42,43 @@ Currently tests a majority of the BioShake 3000-T elm's functionality, including
       - value RUN Running
       - value STOP Arrived in home position
       - value ESTOP Emergency stop
-    - getShakeZPV
+    - getShakeZPV: returns the state of zero position and the coded voltage
+    - getShakeTargetSpeed: returns the target mixing speed
+    - setShakeTargetSpeed: sets the target mixing speed
+    - getShakeActualSpeed: returns the current mixing speed
+    - getShakeMinRpm: returns the minimum setting point, depends on specification
+    - getShakeMaxRpm: returns the maximum setting point, depends on specification
+    - getShakeAcceleration: returns the acceleration/deceleration value
+    - setShakeAcceleration: sets the acceleration/deceleration value in seconds
+    - getShakeAccelerationMin: get minimum acceleration/deceleration time in seconds
+    - getShakeAccelerationMax: get maximum acceleration/deceleration time in seconds
+  - # Temperature control:
+    - tempOn: activates the temperature control and starts heating/cooling
+    - tempOff: switches off the temperature control and stops heating/cooling
+    - getTempState: returns the state of the temperature function
+      - value 0 Temperature control is disabled
+      - value 1 Temperature control is enabled
+    - getTempStateAsString: returns the state of the temperature function as a string
+      - value off Temperature control is disabled
+      - value on Temperature control is enabled
+    - getTempTarget: returns the target temperature
+    - setTempTarget: sets the target temperature in 1/10 degrees C between 0 and 99 degrees C
+    - getTempActual: returns the current temperature
+    - getTempMin: returns the minimum of temperature set point (0 C)
+    - getTempMax: returns the maximum of temperature set point (99 C)
+    - getTemp40Calibr: returns the actual offset value on the calibration point at 40 C
+    - setTemp40Calibr: set the offset value on the calibration point at 40 C
+    - getTemp90Calibr: returns the actual offset value on the calibration point at 90 C
+    - setTemp90Calibr: set the offset value on the calibration point at 90 C
+  - # ELM control
+    - setElmLockPos: closes the ELM
+    - setElmUnlockPos: opens the ELM for gripping microplates
+    - getElmState: returns the state of the ELM
+      - value 0 ELM nor in lock or unlock position
+      - value 1 ELM lock poition - Microplate is locked
+      - value 3 ELM in unlocked position - Microplate is unlocked
+      - value 9 Error - detecting ELM state
+    - getElmStateAsString: returns the state of the ELM as a string
+      - value ELMLocked Microplate is locked
+      - value ELMUnlcoked Microplate is unlocked
+      - value ELMError Error
