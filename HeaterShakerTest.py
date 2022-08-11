@@ -1,3 +1,4 @@
+import time
 from qinstruments import BioShake3000T
 
 if __name__ == '__main__':
