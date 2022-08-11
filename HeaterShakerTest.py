@@ -1,7 +1,4 @@
-import serial
-import time
 from qinstruments import BioShake3000T
-from utils import get_serial_port_names, check_serial_port_in_use
 
 if __name__ == '__main__':
     print("Testing BioShake 3000-T elm")
